@@ -5,11 +5,11 @@ module.exports = {
   "username": "profile_user",
   "password": "password",
   "database": "profile_db",
-  "entities": ["models/*.{js,ts}"],
-  "migrations": ["migrations/*.{js,ts}"],
+  "entities": ["src/models/*.{js,ts}"],
+  "migrations": ["database/migrations/*.{js,ts}"],
   "migrationsTableName": "typeorm_migrations",
   "cli": {
-    "migrationsDir": "./migrations",
-    "entities": "./models"
+    "migrationsDir": "./database/migrations",
+    "entities": "./src/models"
   }
 }
