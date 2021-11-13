@@ -1,13 +1,18 @@
 import type {NextPage} from 'next'
+import CssBaseline from '@mui/material/CssBaseline';
+import Container from '@mui/material/Container';
 
 import {Post} from 'models/post';
 import {getOrCreateConnection} from 'utils/database';
 
 const Home: NextPage = () => {
   return (
-    <div>
-      <h1>Hello World</h1>
-    </div>
+    <>
+      <CssBaseline />
+      <Container>
+        <h1>Hello World</h1>
+      </Container>
+    </>
   )
 }
 
