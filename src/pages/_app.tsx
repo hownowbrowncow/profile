@@ -1,9 +1,10 @@
 import 'reflect-metadata';
-import '../styles/globals.css'
+import '../styles/globals.css';
 
-import type { AppProps } from 'next/app'
+import type {AppProps} from 'next/app';
+import Link from 'next/link';
 import Container from '@mui/material/Container';
-import { SessionProvider} from 'next-auth/react'
+import {SessionProvider} from 'next-auth/react';
 import {useState} from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -14,14 +15,13 @@ import IconButton from '@mui/material/IconButton';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
 import MenuIcon from '@mui/icons-material/Menu';
 import HomeIcon from '@mui/icons-material/Home';
 import PersonIcon from '@mui/icons-material/Person';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 
-function App({ Component, pageProps: { session, ...pageProps }}: AppProps) {
+function App({Component, pageProps: {session, ...pageProps}}: AppProps) {
   const [mobileOpen, setMobileOpen] = useState(false);
   const drawerWidth = 240;
 
@@ -38,13 +38,17 @@ function App({ Component, pageProps: { session, ...pageProps }}: AppProps) {
           <ListItemIcon>
             <HomeIcon />
           </ListItemIcon>
-          <ListItemText primary="Home" />
+          <Link href="/">
+            <a>Home</a>
+          </Link>
         </ListItem>
         <ListItem button>
           <ListItemIcon>
             <PersonIcon />
           </ListItemIcon>
-          <ListItemText primary="Sign In" />
+          <Link href="/user">
+            <a>User</a>
+          </Link>
         </ListItem>
       </List>
     </div>
@@ -57,13 +61,13 @@ function App({ Component, pageProps: { session, ...pageProps }}: AppProps) {
         <Container>
 
 
-          <Box sx={{ display: 'flex' }}>
+          <Box sx={{display: 'flex'}}>
             <CssBaseline />
             <AppBar
               position="fixed"
               sx={{
-                width: { sm: `calc(100% - ${drawerWidth}px)` },
-                  ml: { sm: `${drawerWidth}px` },
+                width: {sm: `calc(100% - ${drawerWidth}px)`},
+                ml: {sm: `${drawerWidth}px`},
               }}
             >
               <Toolbar>
@@ -72,7 +76,7 @@ function App({ Component, pageProps: { session, ...pageProps }}: AppProps) {
                   aria-label="open drawer"
                   edge="start"
                   onClick={handleDrawerToggle}
-                  sx={{ mr: 2, display: { sm: 'none' } }}
+                  sx={{mr: 2, display: {sm: 'none'}}}
                 >
                   <MenuIcon />
                 </IconButton>
@@ -83,7 +87,7 @@ function App({ Component, pageProps: { session, ...pageProps }}: AppProps) {
             </AppBar>
             <Box
               component="nav"
-              sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
+              sx={{width: {sm: drawerWidth}, flexShrink: {sm: 0}}}
               aria-label="mailbox folders"
             >
               {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
@@ -95,8 +99,8 @@ function App({ Component, pageProps: { session, ...pageProps }}: AppProps) {
                   keepMounted: true, // Better open performance on mobile.
                 }}
                 sx={{
-                  display: { xs: 'block', sm: 'none' },
-                    '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
+                  display: {xs: 'block', sm: 'none'},
+                  '& .MuiDrawer-paper': {boxSizing: 'border-box', width: drawerWidth},
                 }}
               >
                 {drawer}
@@ -104,8 +108,8 @@ function App({ Component, pageProps: { session, ...pageProps }}: AppProps) {
               <Drawer
                 variant="permanent"
                 sx={{
-                  display: { xs: 'none', sm: 'block' },
-                    '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
+                  display: {xs: 'none', sm: 'block'},
+                  '& .MuiDrawer-paper': {boxSizing: 'border-box', width: drawerWidth},
                 }}
                 open
               >
@@ -114,7 +118,7 @@ function App({ Component, pageProps: { session, ...pageProps }}: AppProps) {
             </Box>
             <Box
               component="main"
-              sx={{ flexGrow: 1, p: 3, width: { sm: `calc(100% - ${drawerWidth}px)` } }}
+              sx={{flexGrow: 1, p: 3, width: {sm: `calc(100% - ${drawerWidth}px)`}}}
             >
               <Toolbar />
               <Component {...pageProps} />
@@ -126,4 +130,4 @@ function App({ Component, pageProps: { session, ...pageProps }}: AppProps) {
   );
 }
 
-export default App
+export default App;
