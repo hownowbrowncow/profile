@@ -1,4 +1,5 @@
 import NextAuth from "next-auth"
+import * as bcrypt from "bcrypt"
 import {TypeORMLegacyAdapter} from "@next-auth/typeorm-legacy-adapter"
 import CredentialsProvider from "next-auth/providers/credentials"
 
@@ -28,8 +29,9 @@ export default NextAuth({
           const conn = await getOrCreateConnection();
           const repo = conn.getRepository(entities.UserEntity)
           const user = await repo.findOne({email: credentials.username})
+          const isMatch = await bcrypt.compare(credentials.password, user?.password)
 
-          if (user) {
+          if (user && isMatch) {
             console.log('user found', user);
 
             return user;
