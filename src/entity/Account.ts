@@ -3,17 +3,10 @@ import {
   PrimaryGeneratedColumn,
   Column,
   ManyToOne,
-  ValueTransformer,
 } from "typeorm"
 
+import { bigIntTransformer } from "utils/transformers"
 import {UserEntity} from "entity"
-
-export const transformer: Record<"bigint", ValueTransformer> = {
-  bigint: {
-    from: (bigInt: string | null) => bigInt && parseInt(bigInt, 10),
-    to: (bigInt?: number) => bigInt?.toString(),
-  },
-}
 
 @Entity({name: "accounts"})
 export class AccountEntity {
@@ -41,7 +34,7 @@ export class AccountEntity {
   @Column({
     nullable: true,
     type: "bigint",
-    transformer: transformer.bigint,
+    transformer: bigIntTransformer,
   })
   expires_at!: number | null
 

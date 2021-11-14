@@ -1,11 +1,6 @@
-import {Entity, PrimaryGeneratedColumn, Column, ValueTransformer} from "typeorm"
+import {Entity, PrimaryGeneratedColumn, Column} from "typeorm"
 
-export const transformer: Record<"date", ValueTransformer> = {
-  date: {
-    from: (date: string | null) => date && new Date(parseInt(date, 10)),
-    to: (date?: Date) => date?.valueOf().toString(),
-  },
-}
+import { dateTransformer } from "utils/transformers"
 
 @Entity({name: "verification_tokens"})
 export class VerificationTokenEntity {
@@ -18,6 +13,6 @@ export class VerificationTokenEntity {
   @Column()
   identifier!: string
 
-  @Column({transformer: transformer.date})
+  @Column({transformer: dateTransformer})
   expires!: string
 }

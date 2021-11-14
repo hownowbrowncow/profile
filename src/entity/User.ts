@@ -3,17 +3,10 @@ import {
   PrimaryGeneratedColumn,
   Column,
   OneToMany,
-  ValueTransformer,
 } from "typeorm"
 
+import {dateTransformer} from "utils/transformers"
 import {SessionEntity, AccountEntity} from "entity"
-
-export const transformer: Record<"date", ValueTransformer> = {
-  date: {
-    from: (date: string | null) => date && new Date(parseInt(date, 10)),
-    to: (date?: Date) => date?.valueOf().toString(),
-  },
-}
 
 @Entity({name: "users"})
 export class UserEntity {
@@ -32,7 +25,7 @@ export class UserEntity {
   @Column({type: "varchar", nullable: true})
   salt!: string | null
 
-  @Column({type: "varchar", nullable: true, transformer: transformer.date})
+  @Column({type: "varchar", nullable: true, transformer: dateTransformer})
   emailVerified!: string | null
 
   @Column({type: "varchar", nullable: true})

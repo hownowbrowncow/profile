@@ -3,17 +3,10 @@ import {
   PrimaryGeneratedColumn,
   Column,
   ManyToOne,
-  ValueTransformer,
 } from "typeorm"
 
 import {UserEntity} from "entity"
-
-export const transformer: Record<"date", ValueTransformer> = {
-  date: {
-    from: (date: string | null) => date && new Date(parseInt(date, 10)),
-    to: (date?: Date) => date?.valueOf().toString(),
-  },
-}
+import { dateTransformer } from "utils/transformers"
 
 @Entity({name: "sessions"})
 export class SessionEntity {
@@ -26,7 +19,7 @@ export class SessionEntity {
   @Column({type: "uuid"})
   userId!: string
 
-  @Column({transformer: transformer.date})
+  @Column({transformer: dateTransformer})
   expires!: string
 
   @ManyToOne(() => UserEntity, (user) => user.sessions)
