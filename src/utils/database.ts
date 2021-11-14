@@ -1,4 +1,10 @@
 import {getConnection, createConnection, ConnectionOptions, ValueTransformer} from "typeorm";
+import {
+  UserEntity,
+  AccountEntity,
+  SessionEntity,
+  VerificationTokenEntity,
+} from "entity"
 
 export const transformer: Record<"date" | "bigint", ValueTransformer> = {
   date: {
@@ -18,8 +24,9 @@ export const connectionOptions: ConnectionOptions = {
   username: process.env.POSTGRES_USER,
   password: process.env.POSTGRES_PASSWORD,
   database: process.env.POSTGRES_DB,
+  entities: [UserEntity, AccountEntity, SessionEntity, VerificationTokenEntity],
   synchronize: false,
-  logging: false,
+  logging: true,
 };
 
 export async function getOrCreateConnection() {

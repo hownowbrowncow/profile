@@ -3,10 +3,17 @@ import {
   PrimaryGeneratedColumn,
   Column,
   ManyToOne,
+  ValueTransformer,
 } from "typeorm"
 
-import {transformer} from "utils/database"
 import {UserEntity} from "entity"
+
+export const transformer: Record<"date", ValueTransformer> = {
+  date: {
+    from: (date: string | null) => date && new Date(parseInt(date, 10)),
+    to: (date?: Date) => date?.valueOf().toString(),
+  },
+}
 
 @Entity({name: "sessions"})
 export class SessionEntity {
