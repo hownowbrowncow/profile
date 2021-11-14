@@ -1,13 +1,9 @@
 import type {NextPage} from 'next'
-import { signIn } from "next-auth/react"
 
-const Home: NextPage = () => {
-  return (
-    <>
-      <h1>Hello World</h1>
-      <button onClick={() => signIn("credentials", {redirect: false, username: "admin@localhost", password: "password"})}>Click</button>
-    </>
-  )
+interface Props {}
+
+const Home: NextPage<Props> = () => {
+  return <h1>Home Page</h1>
 }
 
 export async function getServerSideProps() {

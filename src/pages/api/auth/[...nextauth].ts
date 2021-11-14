@@ -24,7 +24,6 @@ export default NextAuth({
         }
       },
       async authorize(credentials) {
-        console.log('attemping auth', credentials)
         try {
           const conn = await getOrCreateConnection();
           const repo = conn.getRepository(entities.UserEntity)
@@ -32,8 +31,6 @@ export default NextAuth({
           const isMatch = await bcrypt.compare(credentials.password, user?.password)
 
           if (user && isMatch) {
-            console.log('user found', user);
-
             return user;
           }
 
