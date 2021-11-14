@@ -1,18 +1,36 @@
-import {Entity, PrimaryGeneratedColumn, Column} from "typeorm";
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  OneToMany,
+} from "typeorm"
 
-@Entity()
-export class User {
+import {transformer} from "utils/database"
+import {SessionEntity, AccountEntity} from "entity"
 
-    @PrimaryGeneratedColumn()
-    id: number;
+@Entity({name: "users"})
+export class UserEntity {
+  @PrimaryGeneratedColumn("uuid")
+  id!: string
 
-    @Column()
-    firstName: string;
+  @Column({type: "varchar", nullable: true})
+  name!: string | null
 
-    @Column()
-    lastName: string;
+  @Column({type: "varchar", nullable: true, unique: true})
+  email!: string | null
 
-    @Column()
-    age: number;
+  @Column({type: "varchar", nullable: true, transformer: transformer.date})
+  emailVerified!: string | null
 
+  @Column({type: "varchar", nullable: true})
+  image!: string | null
+
+  @Column({type: "varchar", nullable: true})
+  role!: string | null
+
+  @OneToMany(() => SessionEntity, (session) => session.userId)
+  sessions!: SessionEntity[]
+
+  @OneToMany(() => AccountEntity, (account) => account.userId)
+  accounts!: AccountEntity[]
 }
