@@ -2,8 +2,8 @@ import type {NextPage} from 'next'
 import CssBaseline from '@mui/material/CssBaseline';
 import Container from '@mui/material/Container';
 
-import {Post} from 'models/post';
 import {getOrCreateConnection} from 'utils/database';
+import {Post} from 'entity/Post';
 
 const Home: NextPage = () => {
   return (
