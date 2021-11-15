@@ -2,24 +2,19 @@ import 'reflect-metadata';
 import '../styles/globals.css';
 
 import type {AppProps} from 'next/app';
-import Link from 'next/link';
 import Container from '@mui/material/Container';
 import {SessionProvider} from 'next-auth/react';
 import {useState} from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import CssBaseline from '@mui/material/CssBaseline';
-import Divider from '@mui/material/Divider';
 import Drawer from '@mui/material/Drawer';
 import IconButton from '@mui/material/IconButton';
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import MenuIcon from '@mui/icons-material/Menu';
-import HomeIcon from '@mui/icons-material/Home';
-import PersonIcon from '@mui/icons-material/Person';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
+import MenuIcon from '@mui/icons-material/Menu';
+
+import DrawerNav from 'components/DrawerNav';
 
 function App({Component, pageProps: {session, ...pageProps}}: AppProps) {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -29,38 +24,11 @@ function App({Component, pageProps: {session, ...pageProps}}: AppProps) {
     setMobileOpen(!mobileOpen);
   };
 
-  const drawer = (
-    <div>
-      <Toolbar />
-      <Divider />
-      <List>
-        <ListItem button>
-          <ListItemIcon>
-            <HomeIcon />
-          </ListItemIcon>
-          <Link href="/">
-            <a>Home</a>
-          </Link>
-        </ListItem>
-        <ListItem button>
-          <ListItemIcon>
-            <PersonIcon />
-          </ListItemIcon>
-          <Link href="/user">
-            <a>User</a>
-          </Link>
-        </ListItem>
-      </List>
-    </div>
-  );
-
   return (
     <>
       <SessionProvider session={session}>
         <CssBaseline />
         <Container>
-
-
           <Box sx={{display: 'flex'}}>
             <CssBaseline />
             <AppBar
@@ -81,7 +49,7 @@ function App({Component, pageProps: {session, ...pageProps}}: AppProps) {
                   <MenuIcon />
                 </IconButton>
                 <Typography variant="h6" noWrap component="div">
-                  Responsive drawer
+                  Profile
                 </Typography>
               </Toolbar>
             </AppBar>
@@ -103,7 +71,7 @@ function App({Component, pageProps: {session, ...pageProps}}: AppProps) {
                   '& .MuiDrawer-paper': {boxSizing: 'border-box', width: drawerWidth},
                 }}
               >
-                {drawer}
+                <DrawerNav />
               </Drawer>
               <Drawer
                 variant="permanent"
@@ -113,7 +81,7 @@ function App({Component, pageProps: {session, ...pageProps}}: AppProps) {
                 }}
                 open
               >
-                {drawer}
+                <DrawerNav />
               </Drawer>
             </Box>
             <Box
