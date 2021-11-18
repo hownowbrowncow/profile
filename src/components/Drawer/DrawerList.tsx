@@ -7,7 +7,7 @@ import List from '@mui/material/List';
 import PersonIcon from '@mui/icons-material/Person';
 import HomeIcon from '@mui/icons-material/Home';
 
-const DrawerNav = () => {
+const DrawerList = () => {
   return (
     <div>
       <Toolbar />
@@ -42,4 +42,4 @@ const DrawerNav = () => {
   );
 };
 
-export default DrawerNav;
+export default DrawerList;
