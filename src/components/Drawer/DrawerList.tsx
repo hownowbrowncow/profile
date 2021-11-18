@@ -7,36 +7,43 @@ import List from '@mui/material/List';
 import PersonIcon from '@mui/icons-material/Person';
 import HomeIcon from '@mui/icons-material/Home';
 
+
 const DrawerList = () => {
   return (
     <div>
       <Toolbar />
       <Divider />
       <List>
-        <ListItem button>
-          <ListItemIcon>
-            <HomeIcon />
-          </ListItemIcon>
-          <Link href='/'>
-            <a>Home</a>
-          </Link>
-        </ListItem>
-        <ListItem button>
-          <ListItemIcon>
-            <PersonIcon />
-          </ListItemIcon>
-          <Link href='/user'>
-            <a>User</a>
-          </Link>
-        </ListItem>
-        <ListItem button>
-          <ListItemIcon>
-            <PersonIcon />
-          </ListItemIcon>
-          <Link href='/sign-in'>
-            <a>Sign-In</a>
-          </Link>
-        </ListItem>
+        <Link href='/'>
+          <a>
+            <ListItem button>
+              <ListItemIcon>
+                <HomeIcon />
+              </ListItemIcon>
+              Home
+            </ListItem>
+          </a>
+        </Link>
+        <Link href='/user'>
+          <a>
+            <ListItem button>
+              <ListItemIcon>
+                <PersonIcon />
+              </ListItemIcon>
+              User
+            </ListItem>
+          </a>
+        </Link>
+        <Link href='/sign-in'>
+          <a>
+            <ListItem button>
+              <ListItemIcon>
+                <PersonIcon />
+              </ListItemIcon>
+              Sign In
+            </ListItem>
+          </a>
+        </Link>
       </List>
     </div>
   );
