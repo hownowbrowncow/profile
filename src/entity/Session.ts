@@ -3,20 +3,20 @@ import {
   PrimaryGeneratedColumn,
   Column,
   ManyToOne,
-} from "typeorm"
+} from 'typeorm';
 
-import {UserEntity} from "entity"
-import { dateTransformer } from "utils/transformers"
+import {UserEntity} from 'entity';
+import { dateTransformer } from 'utils/transformers';
 
-@Entity({name: "sessions"})
+@Entity({name: 'sessions'})
 export class SessionEntity {
-  @PrimaryGeneratedColumn("uuid")
+  @PrimaryGeneratedColumn('uuid')
   id!: string
 
   @Column({unique: true})
   sessionToken!: string
 
-  @Column({type: "uuid"})
+  @Column({type: 'uuid'})
   userId!: string
 
   @Column({transformer: dateTransformer})

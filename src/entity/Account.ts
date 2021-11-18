@@ -3,17 +3,17 @@ import {
   PrimaryGeneratedColumn,
   Column,
   ManyToOne,
-} from "typeorm"
+} from 'typeorm';
 
-import { bigIntTransformer } from "utils/transformers"
-import {UserEntity} from "entity"
+import { bigIntTransformer } from 'utils/transformers';
+import {UserEntity} from 'entity';
 
-@Entity({name: "accounts"})
+@Entity({name: 'accounts'})
 export class AccountEntity {
-  @PrimaryGeneratedColumn("uuid")
+  @PrimaryGeneratedColumn('uuid')
   id!: string
 
-  @Column({type: "uuid"})
+  @Column({type: 'uuid'})
   userId!: string
 
   @Column()
@@ -25,35 +25,35 @@ export class AccountEntity {
   @Column()
   providerAccountId!: string
 
-  @Column({type: "varchar", nullable: true})
+  @Column({type: 'varchar', nullable: true})
   refresh_token!: string
 
-  @Column({type: "varchar", nullable: true})
+  @Column({type: 'varchar', nullable: true})
   access_token!: string | null
 
   @Column({
     nullable: true,
-    type: "bigint",
+    type: 'bigint',
     transformer: bigIntTransformer,
   })
   expires_at!: number | null
 
-  @Column({type: "varchar", nullable: true})
+  @Column({type: 'varchar', nullable: true})
   token_type!: string | null
 
-  @Column({type: "varchar", nullable: true})
+  @Column({type: 'varchar', nullable: true})
   scope!: string | null
 
-  @Column({type: "varchar", nullable: true})
+  @Column({type: 'varchar', nullable: true})
   id_token!: string | null
 
-  @Column({type: "varchar", nullable: true})
+  @Column({type: 'varchar', nullable: true})
   session_state!: string | null
 
-  @Column({type: "varchar", nullable: true})
+  @Column({type: 'varchar', nullable: true})
   oauth_token_secret!: string | null
 
-  @Column({type: "varchar", nullable: true})
+  @Column({type: 'varchar', nullable: true})
   oauth_token!: string | null
 
   @ManyToOne(() => UserEntity, (user) => user.accounts, {

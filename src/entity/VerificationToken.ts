@@ -1,10 +1,10 @@
-import {Entity, PrimaryGeneratedColumn, Column} from "typeorm"
+import {Entity, PrimaryGeneratedColumn, Column} from 'typeorm';
 
-import { dateTransformer } from "utils/transformers"
+import { dateTransformer } from 'utils/transformers';
 
-@Entity({name: "verification_tokens"})
+@Entity({name: 'verification_tokens'})
 export class VerificationTokenEntity {
-  @PrimaryGeneratedColumn("uuid")
+  @PrimaryGeneratedColumn('uuid')
   id!: string
 
   @Column()

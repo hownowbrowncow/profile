@@ -3,32 +3,32 @@ import {
   PrimaryGeneratedColumn,
   Column,
   OneToMany,
-} from "typeorm"
+} from 'typeorm';
 
-import {dateTransformer} from "utils/transformers"
-import {SessionEntity, AccountEntity} from "entity"
+import {dateTransformer} from 'utils/transformers';
+import {SessionEntity, AccountEntity} from 'entity';
 
-@Entity({name: "users"})
+@Entity({name: 'users'})
 export class UserEntity {
-  @PrimaryGeneratedColumn("uuid")
+  @PrimaryGeneratedColumn('uuid')
   id!: string
 
-  @Column({type: "varchar", nullable: true})
+  @Column({type: 'varchar', nullable: true})
   name!: string | null
 
-  @Column({type: "varchar", nullable: true, unique: true})
+  @Column({type: 'varchar', nullable: true, unique: true})
   email!: string | null
 
-  @Column({type: "varchar", nullable: true})
+  @Column({type: 'varchar', nullable: true})
   password!: string | null
 
-  @Column({type: "varchar", nullable: true})
+  @Column({type: 'varchar', nullable: true})
   salt!: string | null
 
-  @Column({type: "varchar", nullable: true, transformer: dateTransformer})
+  @Column({type: 'varchar', nullable: true, transformer: dateTransformer})
   emailVerified!: string | null
 
-  @Column({type: "varchar", nullable: true})
+  @Column({type: 'varchar', nullable: true})
   role!: string | null
 
   @OneToMany(() => SessionEntity, (session) => session.userId)

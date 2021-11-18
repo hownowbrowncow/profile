@@ -1,5 +1,5 @@
 import type {NextPage} from 'next';
-import {useSession} from "next-auth/react";
+import {useSession} from 'next-auth/react';
 
 const User: NextPage = () => {
   const session = useSession();

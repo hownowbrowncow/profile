@@ -17,7 +17,7 @@ const DrawerNav = () => {
           <ListItemIcon>
             <HomeIcon />
           </ListItemIcon>
-          <Link href="/">
+          <Link href='/'>
             <a>Home</a>
           </Link>
         </ListItem>
@@ -25,7 +25,7 @@ const DrawerNav = () => {
           <ListItemIcon>
             <PersonIcon />
           </ListItemIcon>
-          <Link href="/user">
+          <Link href='/user'>
             <a>User</a>
           </Link>
         </ListItem>
@@ -33,7 +33,7 @@ const DrawerNav = () => {
           <ListItemIcon>
             <PersonIcon />
           </ListItemIcon>
-          <Link href="/sign-in">
+          <Link href='/sign-in'>
             <a>Sign-In</a>
           </Link>
         </ListItem>

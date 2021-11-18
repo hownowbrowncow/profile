@@ -1,16 +1,16 @@
-import {getConnection, createConnection, ConnectionOptions} from "typeorm";
+import {getConnection, createConnection, ConnectionOptions} from 'typeorm';
 
 import {
   UserEntity,
   AccountEntity,
   SessionEntity,
   VerificationTokenEntity,
-} from "entity"
+} from 'entity';
 
 let connectionReadyPromise: Promise<void> | null = null;
 
 export const connectionOptions: ConnectionOptions = {
-  type: "postgres",
+  type: 'postgres',
   host: process.env.POSTGRES_HOST,
   port: parseInt(process.env.POSTGRES_PORT),
   username: process.env.POSTGRES_USER,
@@ -31,7 +31,7 @@ function prepareConnection() {
         console.log('no stale connection');
       }
 
-      await createConnection(connectionOptions)
+      await createConnection(connectionOptions);
     })();
   }
 
