@@ -17,7 +17,6 @@ const SignIn: NextPage = () => {
   const [emailInput, setEmailInput] = useState('');
   const [passwordInput, setPasswordInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  const test = 'test';
 
   const handleEmailChange = (event: ChangeEvent<HTMLInputElement>) => {
     setEmailInput(event.target.value);

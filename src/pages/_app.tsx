@@ -32,7 +32,7 @@ function App({Component, pageProps: {session, ...pageProps}}: AppProps) {
           <Box sx={{display: 'flex'}}>
             <CssBaseline />
             <AppBar
-              position="fixed"
+              position='fixed'
               sx={{
                 width: {sm: `calc(100% - ${drawerWidth}px)`},
                 ml: {sm: `${drawerWidth}px`},
@@ -40,27 +40,27 @@ function App({Component, pageProps: {session, ...pageProps}}: AppProps) {
             >
               <Toolbar>
                 <IconButton
-                  color="inherit"
-                  aria-label="open drawer"
-                  edge="start"
+                  color='inherit'
+                  aria-label='open drawer'
+                  edge='start'
                   onClick={handleDrawerToggle}
                   sx={{mr: 2, display: {sm: 'none'}}}
                 >
                   <MenuIcon />
                 </IconButton>
-                <Typography variant="h6" noWrap component="div">
+                <Typography variant='h6' noWrap component='div'>
                   Profile
                 </Typography>
               </Toolbar>
             </AppBar>
             <Box
-              component="nav"
+              component='nav'
               sx={{width: {sm: drawerWidth}, flexShrink: {sm: 0}}}
-              aria-label="mailbox folders"
+              aria-label='mailbox folders'
             >
               {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
               <Drawer
-                variant="temporary"
+                variant='temporary'
                 open={mobileOpen}
                 onClose={handleDrawerToggle}
                 ModalProps={{
@@ -74,7 +74,7 @@ function App({Component, pageProps: {session, ...pageProps}}: AppProps) {
                 <DrawerNav />
               </Drawer>
               <Drawer
-                variant="permanent"
+                variant='permanent'
                 sx={{
                   display: {xs: 'none', sm: 'block'},
                   '& .MuiDrawer-paper': {boxSizing: 'border-box', width: drawerWidth},
@@ -85,7 +85,7 @@ function App({Component, pageProps: {session, ...pageProps}}: AppProps) {
               </Drawer>
             </Box>
             <Box
-              component="main"
+              component='main'
               sx={{flexGrow: 1, p: 3, width: {sm: `calc(100% - ${drawerWidth}px)`}}}
             >
               <Toolbar />

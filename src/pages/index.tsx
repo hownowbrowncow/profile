@@ -1,10 +1,10 @@
-import type {NextPage} from 'next'
+import type {NextPage} from 'next';
 
 interface Props {}
 
 const Home: NextPage<Props> = () => {
-  return <h1>Home Page</h1>
-}
+  return <h1>Home Page</h1>;
+};
 
 export async function getServerSideProps() {
   return {
@@ -12,4 +12,4 @@ export async function getServerSideProps() {
   };
 }
 
-export default Home
+export default Home;
