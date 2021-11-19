@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import {useSession, signOut} from 'next-auth/react';
 import Toolbar from '@mui/material/Toolbar';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItem from '@mui/material/ListItem';
@@ -7,8 +8,16 @@ import List from '@mui/material/List';
 import PersonIcon from '@mui/icons-material/Person';
 import HomeIcon from '@mui/icons-material/Home';
 
-
 const DrawerList = () => {
+  const {data} = useSession();
+
+  const handleSignOut = () => {
+    signOut({
+      redirect: true,
+      callbackUrl: '/',
+    });
+  };
+
   return (
     <div>
       <Toolbar />
@@ -24,26 +33,37 @@ const DrawerList = () => {
             </ListItem>
           </a>
         </Link>
-        <Link href='/user'>
-          <a>
-            <ListItem button>
+        {data ? (
+          <>
+            <Link href='/user'>
+              <a>
+                <ListItem button>
+                  <ListItemIcon>
+                    <PersonIcon />
+                  </ListItemIcon>
+                  User
+                </ListItem>
+              </a>
+            </Link>
+            <ListItem button onClick={handleSignOut}>
               <ListItemIcon>
                 <PersonIcon />
               </ListItemIcon>
-              User
+              Sign Out
             </ListItem>
-          </a>
-        </Link>
-        <Link href='/sign-in'>
-          <a>
-            <ListItem button>
-              <ListItemIcon>
-                <PersonIcon />
-              </ListItemIcon>
-              Sign In
-            </ListItem>
-          </a>
-        </Link>
+          </>
+        ) : (
+          <Link href='/sign-in'>
+            <a>
+              <ListItem button>
+                <ListItemIcon>
+                  <PersonIcon />
+                </ListItemIcon>
+                Sign In
+              </ListItem>
+            </a>
+          </Link>
+        )}
       </List>
     </div>
   );
