@@ -1,4 +1,5 @@
-import {useState, useContext, ChangeEvent} from 'react';
+import {useContext, ChangeEvent} from 'react';
+import {useForm, Controller, SubmitHandler} from 'react-hook-form';
 import {signIn} from 'next-auth/react';
 import type {NextPage} from 'next';
 import Box from '@mui/material/Box';
@@ -13,35 +14,30 @@ import Divider from '@mui/material/Divider';
 
 import {AppContext} from 'contexts/AppContext';
 
+export interface FormState {
+  email: string
+  password: string
+}
+
 const SignIn: NextPage = () => {
-  const [emailInput, setEmailInput] = useState('');
-  const [passwordInput, setPasswordInput] = useState('');
   const {isLoading, setIsLoading} = useContext(AppContext);
-
-  const handleEmailChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setEmailInput(event.target.value);
-  };
-
-  const handlePasswordChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setPasswordInput(event.target.value);
-  };
+  const {control, handleSubmit} = useForm<FormState>({
+    defaultValues: {
+      email: '',
+      password: '',
+    },
+  });
   
-  const clearInput = () => {
-    setEmailInput('');
-    setPasswordInput('');
-  };
-
-  const handleSubmit = async () => {
+  const onSubmit: SubmitHandler<FormState> = async (data) => {
+    console.log('submit handler', data);
     setIsLoading(true);
 
     try {
       const response = await signIn('credentials', {
-        username: emailInput,
-        password: passwordInput,
+        username: data.email,
+        password: data.password,
         redirect: false,
       });
-
-      clearInput();
 
       console.log('login success', response);
     } catch (e) {
@@ -52,7 +48,11 @@ const SignIn: NextPage = () => {
   };
 
   return (
-    <Box sx={{ flexGrow: 1 }}>
+    <Box
+      sx={{flexGrow: 1}}
+      component='form'
+      onSubmit={handleSubmit(onSubmit)}
+    >
       <Grid
         container
         spacing={2}
@@ -65,33 +65,44 @@ const SignIn: NextPage = () => {
             <CardHeader title='Sign In' />
             <Divider />
             <CardContent>
-              <TextField
-                disabled={isLoading}
-                required
-                fullWidth
-                id='email-input'
-                label='Email'
-                type='email'
-                sx={{mb: '25px'}}
-                value={emailInput}
-                onChange={handleEmailChange}
+              <Controller
+                name='email'
+                control={control}
+                render={({ field: { onChange, value } }) => (
+                  <TextField
+                    disabled={isLoading}
+                    fullWidth
+                    id='email-input'
+                    label='Email'
+                    type='email'
+                    sx={{mb: '25px'}}
+                    value={value}
+                    onChange={onChange}
+                  />
+                )}
               />
-              <TextField
-                disabled={isLoading}
-                required
-                fullWidth
-                id='password-input'
-                label='Password'
-                type='password'
-                value={passwordInput}
-                onChange={handlePasswordChange}
+              <Controller
+                name='password'
+                control={control}
+                render={({ field: { onChange, value } }) => (
+                  <TextField
+                    disabled={isLoading}
+                    fullWidth
+                    id='password-input'
+                    label='Password'
+                    type='password'
+                    value={value}
+                    onChange={onChange}
+                  />
+                )}
               />
             </CardContent>
             <Divider />
             <CardActions sx={{alignItems: 'right', justifyContent: 'right'}}>
+              <input type='submit' hidden />
               <Button
                 variant='contained'
-                onClick={handleSubmit}
+                onClick={handleSubmit(onSubmit)}
               >
                 Login
               </Button>
