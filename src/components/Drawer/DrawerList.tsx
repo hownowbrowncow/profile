@@ -1,5 +1,7 @@
 import Link from 'next/link';
 import {useSession, signOut} from 'next-auth/react';
+import {useRouter} from 'next/router';
+import {useSnackbar} from 'notistack';
 import Toolbar from '@mui/material/Toolbar';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItem from '@mui/material/ListItem';
@@ -9,13 +11,17 @@ import PersonIcon from '@mui/icons-material/Person';
 import HomeIcon from '@mui/icons-material/Home';
 
 const DrawerList = () => {
+  const router = useRouter();
+  const {enqueueSnackbar} = useSnackbar();
   const {data} = useSession();
 
-  const handleSignOut = () => {
-    signOut({
-      redirect: true,
+  const handleSignOut = async () => {
+    const response = await signOut({
+      redirect: false,
       callbackUrl: '/',
     });
+    enqueueSnackbar('Log out successful', {variant: 'success'});
+    router.push(response.url);
   };
 
   return (

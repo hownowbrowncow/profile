@@ -35,44 +35,44 @@ function App({Component, pageProps: {session, ...pageProps}}: AppProps) {
   return (
     <>
       <SessionProvider session={session}>
-        <AppContext.Provider value={appContext}>
-          <CssBaseline />
-          <DrawerToolbar
-            drawerWidth={drawerWidth}
-            handleDrawerToggle={handleDrawerToggle}
-          />
-          <Container>
-            <Box sx={{display: 'flex'}}>
-              <CssBaseline />
-              <Box
-                component='nav'
-                sx={{width: {sm: drawerWidth}, flexShrink: {sm: 0}}}
-                aria-label='mailbox folders'
-              >
-                <DrawerNav
-                  drawerWidth={drawerWidth}
-                  mobileOpen={mobileOpen}
-                  handleDrawerToggle={handleDrawerToggle}
-                />
-              </Box>
-              <Box
-                component='main'
-                sx={{flexGrow: 1, p: 3, width: {sm: `calc(100% - ${drawerWidth}px)`}}}
-              >
-                <Toolbar />
-                <SnackbarProvider
-                  autoHideDuration={3000}
-                  anchorOrigin={{
-                    vertical: 'top',
-                    horizontal: 'center',
-                  }}
+        <SnackbarProvider
+          autoHideDuration={3000}
+          anchorOrigin={{
+            vertical: 'top',
+            horizontal: 'center',
+          }}
+        >
+          <AppContext.Provider value={appContext}>
+            <CssBaseline />
+            <DrawerToolbar
+              drawerWidth={drawerWidth}
+              handleDrawerToggle={handleDrawerToggle}
+            />
+            <Container>
+              <Box sx={{display: 'flex'}}>
+                <CssBaseline />
+                <Box
+                  component='nav'
+                  sx={{width: {sm: drawerWidth}, flexShrink: {sm: 0}}}
+                  aria-label='mailbox folders'
                 >
+                  <DrawerNav
+                    drawerWidth={drawerWidth}
+                    mobileOpen={mobileOpen}
+                    handleDrawerToggle={handleDrawerToggle}
+                  />
+                </Box>
+                <Box
+                  component='main'
+                  sx={{flexGrow: 1, p: 3, width: {sm: `calc(100% - ${drawerWidth}px)`}}}
+                >
+                  <Toolbar />
                   <Component{...pageProps} />
-                </SnackbarProvider>
+                </Box>
               </Box>
-            </Box>
-          </Container>
-        </AppContext.Provider>
+            </Container>
+          </AppContext.Provider>
+        </SnackbarProvider>
       </SessionProvider>
     </>
   );
