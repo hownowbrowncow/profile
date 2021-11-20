@@ -4,6 +4,7 @@ import '../styles/globals.css';
 import {useState, useEffect} from 'react';
 import type {AppProps} from 'next/app';
 import {SessionProvider} from 'next-auth/react';
+import {SnackbarProvider} from 'notistack';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -59,7 +60,15 @@ function App({Component, pageProps: {session, ...pageProps}}: AppProps) {
                 sx={{flexGrow: 1, p: 3, width: {sm: `calc(100% - ${drawerWidth}px)`}}}
               >
                 <Toolbar />
-                <Component{...pageProps} />
+                <SnackbarProvider
+                  autoHideDuration={3000}
+                  anchorOrigin={{
+                    vertical: 'top',
+                    horizontal: 'center',
+                  }}
+                >
+                  <Component{...pageProps} />
+                </SnackbarProvider>
               </Box>
             </Box>
           </Container>

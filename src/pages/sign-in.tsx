@@ -1,6 +1,7 @@
 import {useContext} from 'react';
 import * as yup from 'yup';
 import {yupResolver} from '@hookform/resolvers/yup/dist/yup';
+import {useSnackbar} from 'notistack';
 import {useForm, Controller, SubmitHandler} from 'react-hook-form';
 import {signIn} from 'next-auth/react';
 import type {NextPage} from 'next';
@@ -29,6 +30,7 @@ const schema = yup.object({
 
 const SignIn: NextPage = () => {
   const router = useRouter();
+  const {enqueueSnackbar} = useSnackbar();
   const {isLoading, setIsLoading} = useContext(AppContext);
   const {control, handleSubmit, reset, formState: {errors}} = useForm<FormState>({
     defaultValues: {
@@ -48,16 +50,22 @@ const SignIn: NextPage = () => {
         redirect: false,
       });
 
-      console.log('login success', response);
-      
       if (response.ok) {
         reset();
+        enqueueSnackbar('Login success', {
+          variant: 'success',
+        });
         router.push('/');
       } else {
-        console.log('has errors');
+        enqueueSnackbar('Email or password not valid', {
+          variant: 'error',
+        });
       }
     } catch (e) {
-      console.log('login failed', e);
+      reset();
+      enqueueSnackbar('Something went wrong', {
+        variant: 'error',
+      });
     } finally {
       setIsLoading(false);
     }
