@@ -1,4 +1,6 @@
-import {useContext, ChangeEvent} from 'react';
+import {useContext} from 'react';
+import * as yup from 'yup';
+import {yupResolver} from '@hookform/resolvers/yup/dist/yup';
 import {useForm, Controller, SubmitHandler} from 'react-hook-form';
 import {signIn} from 'next-auth/react';
 import type {NextPage} from 'next';
@@ -19,15 +21,21 @@ export interface FormState {
   password: string
 }
 
+const schema = yup.object({
+  email: yup.string().email().required(),
+  password: yup.string().required(),
+}).required();
+
 const SignIn: NextPage = () => {
   const {isLoading, setIsLoading} = useContext(AppContext);
-  const {control, handleSubmit} = useForm<FormState>({
+  const {control, handleSubmit, reset, formState: {errors}} = useForm<FormState>({
     defaultValues: {
       email: '',
       password: '',
     },
+    resolver: yupResolver(schema),
   });
-  
+
   const onSubmit: SubmitHandler<FormState> = async (data) => {
     console.log('submit handler', data);
     setIsLoading(true);
@@ -40,6 +48,7 @@ const SignIn: NextPage = () => {
       });
 
       console.log('login success', response);
+      reset();
     } catch (e) {
       console.log('login failed', e);
     } finally {
@@ -68,13 +77,15 @@ const SignIn: NextPage = () => {
               <Controller
                 name='email'
                 control={control}
-                render={({ field: { onChange, value } }) => (
+                render={({field: {onChange, value}}) => (
                   <TextField
+                    error={Boolean(errors?.email)}
+                    helperText={errors?.email?.message}
                     disabled={isLoading}
                     fullWidth
                     id='email-input'
                     label='Email'
-                    type='email'
+                    type='text'
                     sx={{mb: '25px'}}
                     value={value}
                     onChange={onChange}
@@ -84,8 +95,10 @@ const SignIn: NextPage = () => {
               <Controller
                 name='password'
                 control={control}
-                render={({ field: { onChange, value } }) => (
+                render={({field: {onChange, value}}) => (
                   <TextField
+                    error={Boolean(errors?.password)}
+                    helperText={errors?.password?.message}
                     disabled={isLoading}
                     fullWidth
                     id='password-input'

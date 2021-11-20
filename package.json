@@ -13,6 +13,7 @@
    "dependencies": {
       "@emotion/react": "^11.5.0",
       "@emotion/styled": "^11.3.0",
+      "@hookform/resolvers": "^2.8.3",
       "@mui/icons-material": "^5.1.0",
       "@mui/material": "^5.1.0",
       "@next-auth/typeorm-legacy-adapter": "^0.1.2-next.19",
@@ -29,7 +30,8 @@
       "react-query": "^3.32.3",
       "reflect-metadata": "^0.1.10",
       "typeorm": "^0.2.37",
-      "typeorm-seeding": "^1.6.1"
+      "typeorm-seeding": "^1.6.1",
+      "yup": "^0.32.11"
    },
    "devDependencies": {
       "@babel/core": "^7.15.5",
