@@ -2,7 +2,7 @@ import {Seeder} from 'typeorm-seeding';
 import * as bcrypt from 'bcrypt';
 
 import { getOrCreateConnection } from 'utils/database';
-import { UserEntity } from 'entity';
+import { UserEntity } from 'entities';
 
 export default class CreateAdmin implements Seeder {
   public async run(): Promise<any> {

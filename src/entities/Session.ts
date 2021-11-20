@@ -5,7 +5,7 @@ import {
   ManyToOne,
 } from 'typeorm';
 
-import {UserEntity} from 'entity';
+import {UserEntity} from 'entities';
 import { dateTransformer } from 'utils/transformers';
 
 @Entity({name: 'sessions'})

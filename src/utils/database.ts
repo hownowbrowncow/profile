@@ -5,7 +5,7 @@ import {
   AccountEntity,
   SessionEntity,
   VerificationTokenEntity,
-} from 'entity';
+} from 'entities';
 
 let connectionReadyPromise: Promise<void> | null = null;
 

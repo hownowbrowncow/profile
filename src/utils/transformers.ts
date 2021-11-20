@@ -1,4 +1,4 @@
-import { ValueTransformer } from 'typeorm';
+import {ValueTransformer} from 'typeorm';
 
 export const dateTransformer: ValueTransformer = {
   from: (date: string | null) => date && new Date(parseInt(date, 10)),

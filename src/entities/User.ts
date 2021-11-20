@@ -6,7 +6,7 @@ import {
 } from 'typeorm';
 
 import {dateTransformer} from 'utils/transformers';
-import {SessionEntity, AccountEntity} from 'entity';
+import {SessionEntity, AccountEntity} from 'entities';
 
 @Entity({name: 'users'})
 export class UserEntity {

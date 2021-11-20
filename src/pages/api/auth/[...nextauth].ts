@@ -4,7 +4,7 @@ import {TypeORMLegacyAdapter} from '@next-auth/typeorm-legacy-adapter';
 import CredentialsProvider from 'next-auth/providers/credentials';
 
 import {connectionOptions, getOrCreateConnection} from 'utils/database';
-import * as entities from 'entity';
+import * as entities from 'entities';
 
 export default NextAuth({
   // @ts-ignore

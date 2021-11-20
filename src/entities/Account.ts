@@ -6,7 +6,7 @@ import {
 } from 'typeorm';
 
 import { bigIntTransformer } from 'utils/transformers';
-import {UserEntity} from 'entity';
+import {UserEntity} from 'entities';
 
 @Entity({name: 'accounts'})
 export class AccountEntity {
