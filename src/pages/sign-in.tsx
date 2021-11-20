@@ -4,15 +4,16 @@ import {yupResolver} from '@hookform/resolvers/yup/dist/yup';
 import {useForm, Controller, SubmitHandler} from 'react-hook-form';
 import {signIn} from 'next-auth/react';
 import type {NextPage} from 'next';
+import {useRouter} from 'next/router';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
-import Button from '@mui/material/Button';
 import CardHeader from '@mui/material/CardHeader';
 import TextField from '@mui/material/TextField';
 import Divider from '@mui/material/Divider';
+import LoadingButton from '@mui/lab/LoadingButton';
 
 import {AppContext} from 'contexts/AppContext';
 
@@ -27,6 +28,7 @@ const schema = yup.object({
 }).required();
 
 const SignIn: NextPage = () => {
+  const router = useRouter();
   const {isLoading, setIsLoading} = useContext(AppContext);
   const {control, handleSubmit, reset, formState: {errors}} = useForm<FormState>({
     defaultValues: {
@@ -37,7 +39,6 @@ const SignIn: NextPage = () => {
   });
 
   const onSubmit: SubmitHandler<FormState> = async (data) => {
-    console.log('submit handler', data);
     setIsLoading(true);
 
     try {
@@ -48,7 +49,13 @@ const SignIn: NextPage = () => {
       });
 
       console.log('login success', response);
-      reset();
+      
+      if (response.ok) {
+        reset();
+        router.push('/');
+      } else {
+        console.log('has errors');
+      }
     } catch (e) {
       console.log('login failed', e);
     } finally {
@@ -113,12 +120,13 @@ const SignIn: NextPage = () => {
             <Divider />
             <CardActions sx={{alignItems: 'right', justifyContent: 'right'}}>
               <input type='submit' hidden />
-              <Button
+              <LoadingButton
+                loading={isLoading}
                 variant='contained'
                 onClick={handleSubmit(onSubmit)}
               >
                 Login
-              </Button>
+              </LoadingButton>
             </CardActions>
           </Card>
         </Grid>
