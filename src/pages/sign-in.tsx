@@ -1,7 +1,6 @@
-import {useState, ChangeEvent} from 'react';
+import {useState, useContext, ChangeEvent} from 'react';
 import {signIn} from 'next-auth/react';
 import type {NextPage} from 'next';
-import {useSession} from 'next-auth/react';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import Card from '@mui/material/Card';
@@ -12,11 +11,12 @@ import CardHeader from '@mui/material/CardHeader';
 import TextField from '@mui/material/TextField';
 import Divider from '@mui/material/Divider';
 
+import {AppContext} from 'contexts/AppContext';
+
 const SignIn: NextPage = () => {
-  const session = useSession();
   const [emailInput, setEmailInput] = useState('');
   const [passwordInput, setPasswordInput] = useState('');
-  const [isLoading, setIsLoading] = useState(false);
+  const {isLoading, setIsLoading} = useContext(AppContext);
 
   const handleEmailChange = (event: ChangeEvent<HTMLInputElement>) => {
     setEmailInput(event.target.value);
@@ -30,11 +30,11 @@ const SignIn: NextPage = () => {
     setEmailInput('');
     setPasswordInput('');
   };
-  
-  const handleSubmit = async () => {
-    try {
-      setIsLoading(true);
 
+  const handleSubmit = async () => {
+    setIsLoading(true);
+
+    try {
       const response = await signIn('credentials', {
         username: emailInput,
         password: passwordInput,
@@ -51,8 +51,6 @@ const SignIn: NextPage = () => {
     }
   };
 
-  console.log('user session', session);
-
   return (
     <Box sx={{ flexGrow: 1 }}>
       <Grid
@@ -68,6 +66,7 @@ const SignIn: NextPage = () => {
             <Divider />
             <CardContent>
               <TextField
+                disabled={isLoading}
                 required
                 fullWidth
                 id='email-input'
@@ -78,6 +77,7 @@ const SignIn: NextPage = () => {
                 onChange={handleEmailChange}
               />
               <TextField
+                disabled={isLoading}
                 required
                 fullWidth
                 id='password-input'
@@ -92,7 +92,6 @@ const SignIn: NextPage = () => {
               <Button
                 variant='contained'
                 onClick={handleSubmit}
-                disabled={isLoading}
               >
                 Login
               </Button>
