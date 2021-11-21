@@ -17,4 +17,7 @@ export class BioEntity {
 
   @Column({type: 'varchar'})
   displayName!: string
+
+  @Column({type: 'varchar'})
+  description!: string
 }
