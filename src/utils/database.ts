@@ -7,6 +7,8 @@ import {
   AccountEntity,
   SessionEntity,
   VerificationTokenEntity,
+  EmployerEntity,
+  PositionEntity,
 } from 'entities';
 
 let connectionReadyPromise: Promise<void> | null = null;
@@ -25,6 +27,8 @@ export const connectionOptions: ConnectionOptions = {
     AccountEntity,
     SessionEntity,
     VerificationTokenEntity,
+    EmployerEntity,
+    PositionEntity,
   ],
   synchronize: false,
   logging: true,

@@ -28,10 +28,10 @@ export class PositionEntity {
   description!: string | null
 
   @Column({type: 'jsonb', nullable: true})
-  highlights!: object[] | null
+  highlights!: Array<string> | null
 
   @Column({type: 'jsonb', nullable: true})
-  keywords!: object[] | null
+  keywords!: Array<string> | null
 
   @ManyToOne(() => EmployerEntity, (employer) => employer.positions)
   employer!: EmployerEntity
