@@ -9,6 +9,9 @@ import Divider from '@mui/material/Divider';
 import List from '@mui/material/List';
 import PersonIcon from '@mui/icons-material/Person';
 import HomeIcon from '@mui/icons-material/Home';
+import LibraryBooksIcon from '@mui/icons-material/LibraryBooks';
+import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
+import PersonOffIcon from '@mui/icons-material/PersonOff';
 
 const DrawerList = () => {
   const router = useRouter();
@@ -41,11 +44,21 @@ const DrawerList = () => {
         </Link>
         {data ? (
           <>
+            <Link href='/bio'>
+              <a>
+                <ListItem button>
+                  <ListItemIcon>
+                    <LibraryBooksIcon />
+                  </ListItemIcon>
+                  Bio
+                </ListItem>
+              </a>
+            </Link>
             <Link href='/user'>
               <a>
                 <ListItem button>
                   <ListItemIcon>
-                    <PersonIcon />
+                    <ManageAccountsIcon />
                   </ListItemIcon>
                   User
                 </ListItem>
@@ -53,7 +66,7 @@ const DrawerList = () => {
             </Link>
             <ListItem button onClick={handleSignOut}>
               <ListItemIcon>
-                <PersonIcon />
+                <PersonOffIcon />
               </ListItemIcon>
               Sign Out
             </ListItem>
