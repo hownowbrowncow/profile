@@ -5,7 +5,7 @@ import {
   ManyToOne,
 } from 'typeorm';
 
-import {EmployerEntity} from 'entities/Employer';
+import {EmployerEntity} from 'entities';
 
 @Entity({name: 'positions'})
 export class PositionEntity {

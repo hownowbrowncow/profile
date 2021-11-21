@@ -5,7 +5,7 @@ import {
   ManyToOne,
 } from 'typeorm';
 
-import { bigIntTransformer } from 'utils/transformers';
+import {bigIntTransformer} from 'utils/transformers';
 import {UserEntity} from 'entities';
 
 @Entity({name: 'accounts'})
