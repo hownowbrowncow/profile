@@ -2,6 +2,7 @@ import {getConnection, createConnection, ConnectionOptions} from 'typeorm';
 
 import {
   BioEntity,
+  LinkEntity,
   UserEntity,
   AccountEntity,
   SessionEntity,
@@ -19,6 +20,7 @@ export const connectionOptions: ConnectionOptions = {
   database: process.env.POSTGRES_DB,
   entities: [
     BioEntity,
+    LinkEntity,
     UserEntity,
     AccountEntity,
     SessionEntity,
