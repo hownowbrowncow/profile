@@ -5,6 +5,11 @@ import {useState, useEffect} from 'react';
 import type {AppProps} from 'next/app';
 import {SessionProvider} from 'next-auth/react';
 import {SnackbarProvider} from 'notistack';
+import {
+  QueryClientProvider,
+  QueryClient,
+} from 'react-query';
+import {ReactQueryDevtools} from 'react-query/devtools';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -13,6 +18,8 @@ import Toolbar from '@mui/material/Toolbar';
 import DrawerNav from 'components/Drawer/DrawerNav';
 import DrawerToolbar from 'components/Drawer/DrawerToolbar';
 import {AppContext, AppContextState, defaultAppContext} from 'contexts/AppContext';
+
+const queryClient = new QueryClient();
 
 function App({Component, pageProps: {session, ...pageProps}}: AppProps) {
   const [isLoading, setIsLoading] = useState(false);
@@ -33,7 +40,8 @@ function App({Component, pageProps: {session, ...pageProps}}: AppProps) {
   }, [isLoading]);
 
   return (
-    <>
+    <QueryClientProvider client={queryClient}>
+      <ReactQueryDevtools />
       <SessionProvider session={session}>
         <SnackbarProvider
           autoHideDuration={3000}
@@ -74,7 +82,7 @@ function App({Component, pageProps: {session, ...pageProps}}: AppProps) {
           </AppContext.Provider>
         </SnackbarProvider>
       </SessionProvider>
-    </>
+    </QueryClientProvider>
   );
 }
 

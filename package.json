@@ -19,6 +19,7 @@
       "@mui/material": "^5.1.0",
       "@next-auth/typeorm-legacy-adapter": "^0.1.2-next.19",
       "@types/faker": "^5.5.9",
+      "axios": "^0.24.0",
       "bcrypt": "^5.0.1",
       "faker": "^5.5.3",
       "mysql": "^2.14.1",
