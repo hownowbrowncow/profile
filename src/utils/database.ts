@@ -1,6 +1,7 @@
 import {getConnection, createConnection, ConnectionOptions} from 'typeorm';
 
 import {
+  BioEntity,
   UserEntity,
   AccountEntity,
   SessionEntity,
@@ -16,7 +17,13 @@ export const connectionOptions: ConnectionOptions = {
   username: process.env.POSTGRES_USER,
   password: process.env.POSTGRES_PASSWORD,
   database: process.env.POSTGRES_DB,
-  entities: [UserEntity, AccountEntity, SessionEntity, VerificationTokenEntity],
+  entities: [
+    BioEntity,
+    UserEntity,
+    AccountEntity,
+    SessionEntity,
+    VerificationTokenEntity,
+  ],
   synchronize: false,
   logging: true,
 };
