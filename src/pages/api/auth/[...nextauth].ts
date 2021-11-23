@@ -53,8 +53,6 @@ export default NextAuth({
   },
   callbacks: {
     async redirect(params) {
-      console.log('redirecting', params);
-
       return params.baseUrl;
     },
   },
