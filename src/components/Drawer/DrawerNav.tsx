@@ -17,6 +17,7 @@ const DrawerNav = (props: DrawerNavProps) => {
         variant='temporary'
         open={mobileOpen}
         onClose={handleDrawerToggle}
+        onClick={handleDrawerToggle}
         ModalProps={{
           keepMounted: true,
         }}
