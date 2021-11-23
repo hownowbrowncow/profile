@@ -23,6 +23,7 @@ const queryClient = new QueryClient();
 
 function App({Component, pageProps: {session, ...pageProps}}: AppProps) {
   const [isLoading, setIsLoading] = useState(false);
+  const [isAuthed, setIsAuthed] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [appContext, setAppContext] = useState<AppContextState>(defaultAppContext);
   const drawerWidth = 240;
@@ -33,11 +34,13 @@ function App({Component, pageProps: {session, ...pageProps}}: AppProps) {
 
   useEffect(() => {
     setAppContext({
+      isAuthed,
+      setIsAuthed,
       isLoading,
       setIsLoading,
       theme: defaultAppContext.theme,
     });
-  }, [isLoading]);
+  }, [isLoading, isAuthed]);
 
   return (
     <QueryClientProvider client={queryClient}>
