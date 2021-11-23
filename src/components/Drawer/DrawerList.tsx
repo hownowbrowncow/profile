@@ -54,7 +54,7 @@ const DrawerList = () => {
   };
 
   return (
-    <div>
+    <>
       <Toolbar />
       <Divider />
       {isLoading ? renderSkeleton() : (
@@ -112,7 +112,7 @@ const DrawerList = () => {
           )}
         </List>
       )}
-    </div>
+    </>
   );
 };
 
