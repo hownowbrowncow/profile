@@ -15,15 +15,17 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
   try {
     const {method} = req;
 
-    switch (method) {
-      case 'GET':
-        const bio = await getBio();
-        return res.status(200).json(bio);
-      default:
-        return res.status(405).end(`Method ${method} Not Allowed`);
+    if (method === 'GET') {
+      const bio = await getBio();
+
+      return res.status(200).json(bio);
+    } else if (method === 'PATCH') {
+      console.log('attempting patch', req.body);
+      return res.status(200).json(req.body);
+    } else {
+      return res.status(405).end(`Method ${method} Not Allowed`);
     }
   } catch (e) {
-    console.log('there was an error', e);
     return res.status(500).json({error: e});
   }
 }
