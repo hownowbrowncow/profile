@@ -5,9 +5,9 @@ import {fetchBio} from 'api/bio';
 interface Props {}
 
 const Bio: NextPage<Props> = () => {
-  const bio = useQuery('bio', fetchBio);
+  const {data} = useQuery('bio', fetchBio);
 
-  console.log('fetching bio', bio);
+  console.log('fetching bio', data);
 
   return <h1>Bio Page</h1>;
 };

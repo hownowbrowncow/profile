@@ -18,13 +18,13 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
     switch (method) {
       case 'GET':
         const bio = await getBio();
-        res.status(200).json(bio);
+        return res.status(200).json(bio);
       default:
-        res.setHeader('Allow', ['GET', 'PUT']);
-        res.status(405).end(`Method ${method} Not Allowed`);
+        return res.status(405).end(`Method ${method} Not Allowed`);
     }
   } catch (e) {
-    res.status(500).json({error: e});
+    console.log('there was an error', e);
+    return res.status(500).json({error: e});
   }
 }
 
