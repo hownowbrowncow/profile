@@ -20,7 +20,7 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
 
       return res.status(200).json({employerId, employer});
     } else if (method === 'PATCH') {
-      return res.status(200).json({foo: employerId, method, body});
+      return res.status(200).json({employerId, body});
     } else {
       return res.status(405).end(`Method ${method} Not Allowed`);
     }

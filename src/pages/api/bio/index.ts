@@ -13,15 +13,14 @@ async function getBio() {
 
 async function handler(req: NextApiRequest, res: NextApiResponse) {
   try {
-    const {method} = req;
+    const {method, body} = req;
 
     if (method === 'GET') {
       const bio = await getBio();
 
       return res.status(200).json(bio);
     } else if (method === 'PATCH') {
-      console.log('attempting patch', req.body);
-      return res.status(200).json(req.body);
+      return res.status(200).json({body});
     } else {
       return res.status(405).end(`Method ${method} Not Allowed`);
     }

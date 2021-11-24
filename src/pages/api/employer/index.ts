@@ -20,7 +20,7 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
 
       return res.status(200).json({employers});
     } else if (method === 'POST') {
-      return res.status(200).json({foo: 'bar', method, body});
+      return res.status(200).json({body});
     } else {
       return res.status(405).end(`Method ${method} Not Allowed`);
     }
