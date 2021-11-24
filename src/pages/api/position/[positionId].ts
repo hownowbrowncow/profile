@@ -1,13 +1,26 @@
 import type {NextApiRequest, NextApiResponse} from 'next';
 
+import {getOrCreateConnection} from 'utils/database';
+import {PositionEntity} from 'entities';
+
+async function getPosition(positionId: string) {
+  const conn = await getOrCreateConnection();
+  const repo = conn.getRepository(PositionEntity);
+  const position = await repo.findOne({id: positionId});
+
+  return position;
+}
+
 async function handler(req: NextApiRequest, res: NextApiResponse) {
   try {
-    const {method, body, query: {employerId}} = req;
+    const {method, body, query: {positionId}} = req;
 
     if (method === 'GET') {
-      return res.status(200).json({foo: employerId, method});
+      const position = await getPosition(positionId as string);
+
+      return res.status(200).json({positionId, position});
     } else if (method === 'PATCH') {
-      return res.status(200).json({foo: employerId, method, body});
+      return res.status(200).json({positionId, body});
     } else {
       return res.status(405).end(`Method ${method} Not Allowed`);
     }
