@@ -77,7 +77,7 @@ function App({Component, pageProps: {session, ...pageProps}}: AppProps) {
                 drawerWidth={drawerWidth}
                 handleDrawerToggle={handleDrawerToggle}
               />
-              <Container>
+              <Container maxWidth='lg'>
                 <Box sx={{display: 'flex'}}>
                   <CssBaseline />
                   <Box

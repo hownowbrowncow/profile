@@ -1,8 +1,10 @@
 import type {NextPage} from 'next';
 import {useQuery} from 'react-query';
+import Box from '@mui/material/Box';
 
 import {fetchBio} from 'api/bio';
 import {fetchEmployers} from 'api/employer';
+import Bio from 'components/Bio';
 
 interface Props {}
 
@@ -12,7 +14,11 @@ const Home: NextPage<Props> = () => {
 
   console.log(bio, employers);
 
-  return <h1>Home Page</h1>;
+  return (
+    <Box>
+      {!bio.isLoading && (<Bio bio={bio.data} />)}
+    </Box>
+  );
 };
 
 export async function getServerSideProps() {
