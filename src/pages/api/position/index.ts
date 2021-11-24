@@ -6,7 +6,7 @@ import {PositionEntity} from 'entities';
 async function getPositions() {
   const conn = await getOrCreateConnection();
   const repo = conn.getRepository(PositionEntity);
-  const positions = repo.find();
+  const positions = await repo.find({relations: ['employer']});
 
   return positions;
 }
