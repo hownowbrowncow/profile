@@ -1,23 +1,36 @@
-import {
-  Entity,
-  PrimaryGeneratedColumn,
-  Column,
-} from 'typeorm';
+import {EntitySchema} from 'typeorm';
 
-@Entity({name: 'bios'})
-export class BioEntity {
-  @PrimaryGeneratedColumn('uuid')
-  id!: string
-
-  @Column({type: 'varchar'})
-  title!: string
-
-  @Column({type: 'varchar'})
-  phone!: string
-
-  @Column({type: 'varchar'})
-  displayName!: string
-
-  @Column({type: 'varchar'})
-  description!: string
+export interface Bio {
+    id: string
+    title: string
+    phone: string
+    email: string
+    displayName: string
+    description: string
 }
+
+export const BioEntity = new EntitySchema<Bio>({
+    name: 'bios',
+    columns: {
+        id: {
+            type: 'uuid',
+            primary: true,
+            generated: true
+        },
+        title: {
+          type: String,
+        },
+        phone: {
+          type: String,
+        },
+        displayName: {
+          type: String,
+        },
+        email: {
+          type: String,
+        },
+        description: {
+          type: String,
+        },
+    },
+});

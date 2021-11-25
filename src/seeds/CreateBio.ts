@@ -17,6 +17,7 @@ export default class CreateBio implements Seeder {
           phone: '555-555-5555',
           displayName: 'Nick Coffey',
           description: `${faker.lorem.paragraph()}`,
+          email: 'admin@ocalhost',
         },
       ])
       .execute();
