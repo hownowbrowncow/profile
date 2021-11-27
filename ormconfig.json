@@ -5,7 +5,7 @@
    "username": "profile_user",
    "password": "password",
    "database": "profile_db",
-   "synchronize": true,
+   "synchronize": false,
    "logging": false,
    "entities": [
       "src/entities/**/*.ts"
