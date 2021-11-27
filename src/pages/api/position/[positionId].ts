@@ -2,10 +2,11 @@ import type {NextApiRequest, NextApiResponse} from 'next';
 
 import {getOrCreateConnection} from 'utils/database';
 import {PositionEntity} from 'entities';
+import {Position} from 'entities/Position';
 
 async function getPosition(positionId: string) {
   const conn = await getOrCreateConnection();
-  const repo = conn.getRepository(PositionEntity);
+  const repo = conn.getRepository<Position>(PositionEntity);
   const position = await repo.findOne({id: positionId}, {relations: ['employer']});
 
   return position;

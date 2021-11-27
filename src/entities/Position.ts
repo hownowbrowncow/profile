@@ -1,38 +1,61 @@
-import {
-  Entity,
-  PrimaryGeneratedColumn,
-  Column,
-  ManyToOne,
-} from 'typeorm';
+import {EntitySchema} from 'typeorm';
 
-import {EmployerEntity} from 'entities';
+import {Employer} from 'entities/Employer';
 
-@Entity({name: 'positions'})
-export class PositionEntity {
-  @PrimaryGeneratedColumn('uuid')
-  id!: string
-
-  @Column({type: 'varchar'})
-  title!: string
-
-  @Column({type: 'varchar', nullable: true})
-  link!: string | null
-
-  @Column({type: 'timestamp with time zone', nullable: true})
-  startDate!: string | null
-
-  @Column({type: 'timestamp with time zone', nullable: true})
-  endDate!: string | null
-
-  @Column({type: 'varchar', nullable: true})
-  description!: string | null
-
-  @Column({type: 'jsonb', nullable: true})
-  highlights!: Array<string> | null
-
-  @Column({type: 'jsonb', nullable: true})
-  keywords!: Array<string> | null
-
-  @ManyToOne(() => EmployerEntity, (employer) => employer.positions)
-  employer!: EmployerEntity
+export interface Position {
+  id: string
+  title: string
+  link?: string
+  startDate?: string
+  endDate?: string
+  description?: string
+  highlights?: Array<string>
+  keywords?: Array<string>
+  employer: Employer
 }
+
+export const PositionEntity = new EntitySchema<Position>({
+  name: 'PositionEntity',
+  tableName: 'positions',
+  columns: {
+    id: {
+      type: 'uuid',
+      generated: true,
+      primary: true,
+    },
+    title: {
+      type: String,
+    },
+    link: {
+      type: String,
+      nullable: true,
+    },
+    startDate: {
+      type: 'timestamp with time zone',
+      nullable: true,
+    },
+    endDate: {
+      type: 'timestamp with time zone',
+      nullable: true,
+    },
+    description: {
+      type: String,
+      nullable: true,
+    },
+    highlights: {
+      type: 'jsonb',
+      nullable: true,
+    },
+    keywords: {
+      type: 'jsonb',
+      nullable: true,
+    },
+  },
+  relations: {
+    employer: {
+      type: 'many-to-one',
+      target: 'EmployerEntity',
+      joinColumn: true,
+    },
+  },
+});

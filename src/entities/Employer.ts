@@ -1,38 +1,60 @@
-import {
-  Entity,
-  PrimaryGeneratedColumn,
-  Column,
-  OneToMany,
-} from 'typeorm';
+import {EntitySchema} from 'typeorm';
 
-import {PositionEntity} from 'entities';
+import {Position} from 'entities/Position';
 
-@Entity({name: 'employers'})
-export class EmployerEntity {
-  @PrimaryGeneratedColumn('uuid')
-  id!: string
-
-  @Column({type: 'varchar'})
-  title!: string
-
-  @Column({type: 'varchar', nullable: true})
-  link!: string | null
-
-  @Column({type: 'timestamp with time zone'})
-  startDate!: string
-
-  @Column({type: 'timestamp with time zone', nullable: true})
-  endDate!: string | null
-
-  @Column({type: 'varchar', nullable: true})
-  description!: string | null
-
-  @Column({type: 'jsonb', nullable: true})
-  highlights!: Array<string> | null
-
-  @Column({type: 'jsonb', nullable: true})
-  keywords!: Array<string> | null
-
-  @OneToMany(() => PositionEntity, position => position.employer)
-  positions: PositionEntity[]
+export interface Employer {
+  id: string
+  title: string
+  link?: string
+  startDate: string
+  endDate: string
+  description?: string
+  highlights?: Array<string>
+  keywords?: Array<string>
+  positions?: Position[]
 }
+
+export const EmployerEntity = new EntitySchema<Employer>({
+  name: 'EmployerEntity',
+  tableName: 'employers',
+  columns: {
+    id: {
+      type: 'uuid',
+      generated: true,
+      primary: true,
+    },
+    title: {
+      type: String,
+    },
+    link: {
+      type: String,
+      nullable: true,
+    },
+    startDate: {
+      type: 'time with time zone',
+    },
+    endDate: {
+      type: 'time with time zone',
+    },
+    description: {
+      type: String,
+      nullable: true,
+    },
+    highlights: {
+      type: 'jsonb',
+      nullable: true,
+    },
+    keywords: {
+      type: 'jsonb',
+      nullable: true,
+    },
+  },
+  relations: {
+    positions: {
+      type: 'one-to-many',
+      target: 'PositionEntity',
+      inverseSide: 'employer',
+      nullable: true,
+    },
+  },
+});
