@@ -1,20 +1,29 @@
-import {
-  Entity,
-  PrimaryGeneratedColumn,
-  Column,
-} from 'typeorm';
+import {EntitySchema} from 'typeorm';
 
-@Entity({name: 'links'})
-export class LinkEntity {
-  @PrimaryGeneratedColumn('uuid')
-  id!: string
-
-  @Column({type: 'varchar'})
-  name!: string
-
-  @Column({type: 'varchar'})
-  href!: string
-
-  @Column({type: 'varchar'})
-  icon!: string
+interface Link {
+  id: string
+  name: string
+  href: string
+  icon: string
 }
+
+export const LinkEntity = new EntitySchema<Link>({
+  name: 'LinkEntity',
+  tableName: 'links',
+  columns: {
+    id: {
+      type: 'uuid',
+      primary: true,
+      generated: true,
+    },
+    name: {
+      type: String,
+    },
+    href: {
+      type: String,
+    },
+    icon: {
+      type: String,
+    },
+  },
+});
