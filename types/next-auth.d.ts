@@ -1,7 +1,10 @@
-import NextAuth from "next-auth"
+import NextAuth from 'next-auth';
 
-declare module "next-auth" {
-  interface User {
+import {SessionEntity} from '../src/entities/Session';
+import {AccountEntity} from '../src/entities/Account';
+
+declare module 'next-auth' {
+  class UserEntity {
     id: string
     name: string | null
     email: string | null
@@ -11,16 +14,5 @@ declare module "next-auth" {
     role: string | null
     sessions: SessionEntity[]
     accounts: AccountEntity[]
-  }
-
-  class UserEntity {
-    id: string;
-    name: string | null;
-    email: string | null;
-    emailVerified: string | null;
-    password: string | null;
-    salt: string | null;
-    sessions: SessionEntity[];
-    accounts: AccountEntity[];
   }
 }

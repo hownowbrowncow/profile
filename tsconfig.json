@@ -23,7 +23,7 @@
     "jsx": "preserve",
     "incremental": true,
     "typeRoots": [
-      "./types",
+      "types",
       "node_modules/@types"
     ],
     "forceConsistentCasingInFileNames": true
