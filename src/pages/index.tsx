@@ -12,11 +12,9 @@ const Home: NextPage<Props> = () => {
   const bio = useQuery('bio', fetchBio);
   const employers = useQuery('employers', fetchEmployers);
 
-  console.log(bio, employers);
-
   return (
     <Box>
-      {!bio.isLoading && (<Bio bio={bio.data} />)}
+      <Bio bio={bio.data} isLoading={bio.isLoading} />
     </Box>
   );
 };

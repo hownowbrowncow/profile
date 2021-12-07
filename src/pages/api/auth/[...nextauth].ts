@@ -7,7 +7,6 @@ import {connectionOptions, getOrCreateConnection} from 'utils/database';
 import * as entities from 'entities';
 
 export default NextAuth({
-  // @ts-ignore
   adapter: TypeORMLegacyAdapter(connectionOptions, {entities}),
   providers: [
     CredentialsProvider({
