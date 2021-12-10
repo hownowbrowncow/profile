@@ -1,4 +1,5 @@
 import {Employer} from 'entities/Employer';
+import {EmployerListItem} from 'components/Employer/EmployerListItem';
 
 interface Props {
   employers: Employer[]
@@ -6,8 +7,7 @@ interface Props {
 }
 
 export function EmployerList(props: Props) {
-  const {employers} = props;
-  console.log(employers);
+  const {employers, isLoading} = props;
 
-  return <h1>Employer List</h1>;
+  return !isLoading && employers.map((employer) => <EmployerListItem key={employer.id} employer={employer} />);
 }
