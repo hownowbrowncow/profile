@@ -5,6 +5,7 @@ import Box from '@mui/material/Box';
 import {fetchBio} from 'api/bio';
 import {fetchEmployers} from 'api/employer';
 import {BioView} from 'components/Bio';
+import {EmployerList} from 'components/Employer';
 
 interface Props {}
 
@@ -15,6 +16,7 @@ const Home: NextPage<Props> = () => {
   return (
     <Box>
       <BioView bio={bio.data} isLoading={bio.isLoading} />
+      <EmployerList employers={employers.data} isLoading={employers.isLoading} />
     </Box>
   );
 };
